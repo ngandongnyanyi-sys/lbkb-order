@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Lisensi - PLN LBKB Auto Processor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #22c55e;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .header p { font-size: 13px; color: var(--text-sub); }
+
+    .badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-sub); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .form-control:focus { outline: none; border-color: var(--primary); }
+    .form-control[readonly] { background: rgba(255, 255, 255, 0.05); color: #cbd5e1; cursor: not-allowed; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .summary-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+
+    .summary-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-sub); margin-bottom: 8px; }
+    .summary-row.total {
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .qris-box {
+      text-align: center;
+      background: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .qris-box img { width: 180px; height: 180px; object-fit: contain; }
+    .qris-box p { color: #0f172a; font-size: 12px; font-weight: 600; margin-top: 6px; }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-wa { background: var(--success); color: #fff; }
+    .btn-wa:hover { background: #16a34a; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>⚡ Lisensi LBKB PLN Auto Processor</h1>
+      <p>Form Pendaftaran & Aktivasi Otomatis</p>
+      <span class="badge">Paket All-in-One Full Access</span>
+    </div>
+
+    <form id="orderForm">
+      <!-- Hardware ID Terisi Otomatis -->
+      <div class="form-group">
+        <label>HARDWARE ID (TERKUNCI OTOMATIS)</label>
+        <input type="text" id="hardwareId" class="form-control" readonly placeholder="Mendeteksi dari aplikasi...">
+      </div>
+
+      <div class="form-group">
+        <label>NAMA PEMBELI / PETUGAS</label>
+        <input type="text" id="namaUser" class="form-control" placeholder="Contoh: Abdul Ghofar" required>
+      </div>
+
+      <div class="form-group">
+        <label>KODE UNIT / ULP (Pisahkan Koma)</label>
+        <input type="text" id="allowedUnit" class="form-control" placeholder="Contoh: 52451, 52452" required>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>JUMLAH UNIT</label>
+          <input type="number" id="jumlahUnit" class="form-control" value="1" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>DURASI (BULAN)</label>
+          <input type="number" id="durasiBulan" class="form-control" value="1" min="1" required>
+        </div>
+      </div>
+    </form>
+
+    <!-- Ringkasan Pembayaran -->
+    <div class="summary-card">
+      <div class="summary-row">
+        <span>Harga Paket (Per Unit / Bln):</span>
+        <span>Rp 200.000</span>
+      </div>
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span id="subtotalTxt">Rp 200.000</span>
+      </div>
+      <div class="summary-row">
+        <span>Kode Unik Transfer:</span>
+        <span id="kodeUnikTxt" style="color: #3b82f6;">+Rp 0</span>
+      </div>
+      <div class="summary-row total">
+        <span>TOTAL TRANSFER:</span>
+        <span id="totalTxt" style="color: #22c55e;">Rp 200.000</span>
+      </div>
+    </div>
+
+    <!-- QRIS / Rekening Pembayaran -->
+    <div class="qris-box">
+      <!-- Ganti src gambar ini dengan file/link QRIS DANA Bisnis kamu -->
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DANA_QRIS_PANKSITE" alt="QRIS Pembayaran">
+      <p>Scan QRIS di atas via DANA / GoPay / OVO / m-Banking</p>
+    </div>
+
+    <!-- Tombol Konfirmasi WA -->
+    <a href="#" id="btnWa" class="btn btn-wa" target="_blank">
+      💬 Konfirmasi & Dapatkan Kode Lisensi via WA
+    </a>
+  </div>
+
+  <script>
+    const HARGA_PER_UNIT = 200000;
+    const ADMIN_WA = "6285726814654"; // Nomor WA milikmu
+
+    // Generate Kode Unik 3 Angka Acak (Misal 101-999)
+    const kodeUnik = Math.floor(Math.random() * 899) + 100;
+
+    // 1. Ambil Parameter Hardware ID dari URL (?hwid=XXX)
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name) || '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const hwIdInput = document.getElementById('hardwareId');
+      const hwFromUrl = getUrlParameter('hwid');
+      
+      if (hwFromUrl) {
+        hwIdInput.value = hwFromUrl;
+      } else {
+        hwIdInput.value = "PLN-DEMO-HARDWARE-ID"; // Fallback jika dibuka langsung
+      }
+
+      calculateTotal();
+    });
+
+    // 2. Hitung Otomatis Total Harga
+    function calculateTotal() {
+      const unit = parseInt(document.getElementById('jumlahUnit').value) || 1;
+      const bulan = parseInt(document.getElementById('durasiBulan').value) || 1;
+
+      const subtotal = unit * bulan * HARGA_PER_UNIT;
+      const total = subtotal + kodeUnik;
+
+      document.getElementById('subtotalTxt').innerText = "Rp " + subtotal.toLocaleString('id-ID');
+      document.getElementById('kodeUnikTxt').innerText = "+Rp " + kodeUnik;
+      document.getElementById('totalTxt').innerText = "Rp " + total.toLocaleString('id-ID');
+
+      updateWaLink(total, unit, bulan);
+    }
+
+    // Bind Event Handler ke Form Input
+    document.getElementById('jumlahUnit').addEventListener('input', calculateTotal);
+    document.getElementById('durasiBulan').addEventListener('input', calculateTotal);
+    document.getElementById('namaUser').addEventListener('input', calculateTotal);
+    document.getElementById('allowedUnit').addEventListener('input', calculateTotal);
+
+    // 3. Susun Pesan Otomatis ke WhatsApp
+    function updateWaLink(totalAmount, unit, bulan) {
+      const hwId = document.getElementById('hardwareId').value;
+      const nama = document.getElementById('namaUser').value || '[Belum diisi]';
+      const kodeUnit = document.getElementById('allowedUnit').value || '[Belum diisi]';
+
+      // Tanggal Expired Otomatis (Hari ini + durasi bulan)
+      const expDate = new Date();
+      expDate.setMonth(expDate.getMonth() + bulan);
+      const expFormatted = expDate.toISOString().split('T')[0];
+
+      const pesan = `Halo Admin Panksite,\n\nSaya telah melakukan pembayaran untuk *Lisensi LBKB PLN Auto Processor*.\n\n` +
+        `👤 *Nama Pembeli:* ${nama}\n` +
+        `🔑 *Hardware ID:* \`${hwId}\`\n` +
+        `📌 *Kode Unit:* ${kodeUnit} (${unit} Unit)\n` +
+        `📅 *Durasi:* ${bulan} Bulan (Expired S/D: ${expFormatted})\n` +
+        `💰 *Nominal Transfer:* Rp ${totalAmount.toLocaleString('id-ID')}\n\n` +
+        `Mohon verifikasi pembayaran & aktifkan kode lisensinya. Terima kasih!`;
+
+      const btnWa = document.getElementById('btnWa');
+      btnWa.href = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
+    }
+  </script>
+</body>
+</html>
