@@ -13,6 +13,7 @@
       --primary: #3b82f6;
       --primary-hover: #2563eb;
       --success: #22c55e;
+      --danger: #ef4444;
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
     }
@@ -30,93 +31,176 @@
 
     .container {
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       background: var(--card-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 32px;
+      padding: 28px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
-    .header { text-align: center; margin-bottom: 24px; }
-    .header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .header p { font-size: 13px; color: var(--text-sub); }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .header p { font-size: 12px; color: var(--text-sub); }
 
     .badge {
       display: inline-block;
       background: rgba(59, 130, 246, 0.15);
       color: var(--primary);
       border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-sub); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 11px; font-weight: 600; color: var(--text-sub); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
     
     .form-control {
       width: 100%;
-      padding: 12px 14px;
+      padding: 10px 12px;
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       color: #fff;
-      font-size: 14px;
+      font-size: 13px;
       transition: all 0.2s ease;
     }
     
     .form-control:focus { outline: none; border-color: var(--primary); }
     .form-control[readonly] { background: rgba(255, 255, 255, 0.05); color: #cbd5e1; cursor: not-allowed; }
+    .form-control.error { border-color: var(--danger); background: rgba(239, 68, 68, 0.1); }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .error-msg { font-size: 11px; color: var(--danger); margin-top: 4px; display: none; font-weight: 500; }
+
+    .input-row { display: flex; gap: 8px; }
+
+    .btn-save-unit {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-save-unit:hover { background: var(--primary-hover); }
+
+    .unit-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .unit-tag {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .unit-tag span {
+      cursor: pointer;
+      color: #ef4444;
+      font-weight: bold;
+      font-size: 13px;
+    }
+    .unit-tag span:hover { color: #f87171; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
     .summary-card {
       background: rgba(15, 23, 42, 0.8);
       border: 1px dashed rgba(255, 255, 255, 0.2);
       border-radius: 10px;
-      padding: 16px;
-      margin-top: 20px;
-      margin-bottom: 24px;
+      padding: 14px;
+      margin-top: 16px;
+      margin-bottom: 18px;
     }
 
-    .summary-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-sub); margin-bottom: 8px; }
+    .summary-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub); margin-bottom: 6px; }
     .summary-row.total {
       border-top: 1px solid var(--border-color);
-      padding-top: 10px;
-      margin-top: 10px;
+      padding-top: 8px;
+      margin-top: 8px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       color: #fff;
     }
 
-    .qris-box {
-      text-align: center;
-      background: #fff;
-      padding: 16px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    /* Kotak Pembayaran */
+    .payment-box {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .payment-title { font-size: 11px; font-weight: 600; color: var(--text-sub); margin-bottom: 10px; text-align: center; }
+    
+    .pay-channels { display: flex; flex-direction: column; gap: 8px; }
+
+    .pay-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .qris-box img { width: 180px; height: 180px; object-fit: contain; }
-    .qris-box p { color: #0f172a; font-size: 12px; font-weight: 600; margin-top: 6px; }
+    .pay-logo-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .pay-logo-name img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .pay-details { text-align: right; }
+    .pay-number {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+    .pay-holder { font-size: 10px; color: var(--text-sub); }
 
     .btn {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       border: none;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s ease;
       text-decoration: none;
     }
@@ -146,15 +230,22 @@
         <input type="text" id="namaUser" class="form-control" placeholder="Contoh: Abdul Ghofar" required>
       </div>
 
+      <!-- Input Unit Tagging -->
       <div class="form-group">
-        <label>KODE UNIT / ULP (Pisahkan Koma)</label>
-        <input type="text" id="allowedUnit" class="form-control" placeholder="Contoh: 52451, 52452" required>
+        <label>KODE UNIT / ULP (MASUKKAN 5 DIGIT)</label>
+        <div class="input-row">
+          <input type="text" id="unitInputBox" class="form-control" placeholder="Contoh: 52451" maxlength="5">
+          <button type="button" id="btnAddUnitTag" class="btn-save-unit">➕ Simpan</button>
+        </div>
+        <div id="unitError" class="error-msg">⚠️ Kode unit/ULP wajib tepat 5 digit!</div>
+        
+        <div id="unitTagsContainer" class="unit-tags-container"></div>
       </div>
 
       <div class="grid-2">
         <div class="form-group">
           <label>JUMLAH UNIT</label>
-          <input type="number" id="jumlahUnit" class="form-control" value="1" min="1" required>
+          <input type="number" id="jumlahUnit" class="form-control" value="0" readonly required>
         </div>
         <div class="form-group">
           <label>DURASI (BULAN)</label>
@@ -171,10 +262,10 @@
       </div>
       <div class="summary-row">
         <span>Subtotal:</span>
-        <span id="subtotalTxt">Rp 200.000</span>
+        <span id="subtotalTxt">Rp 0</span>
       </div>
       <div class="summary-row">
-        <span>Kode Unik Transfer:</span>
+        <span>Kode Unik (Per Unit):</span>
         <span id="kodeUnikTxt" style="color: #3b82f6;">+Rp 0</span>
       </div>
       <div class="summary-row total">
@@ -183,11 +274,48 @@
       </div>
     </div>
 
-    <!-- QRIS / Rekening Pembayaran -->
-    <div class="qris-box">
-      <!-- Ganti src gambar ini dengan file/link QRIS DANA Bisnis kamu -->
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DANA_QRIS_PANKSITE" alt="QRIS Pembayaran">
-      <p>Scan QRIS di atas via DANA / GoPay / OVO / m-Banking</p>
+    <!-- Informasi Pembayaran (Siap diisi nama file gambar logo & nomor rekening aman) -->
+    <div class="payment-box">
+      <div class="payment-title">SILAKAN TRANSFER SESUAI TOTAL KE SALAH SATU:</div>
+      <div class="pay-channels">
+        
+        <!-- DANA -->
+        <div class="pay-item">
+          <div class="pay-logo-name">
+            <img src="dana.png" alt="DANA">
+            <span>DANA</span>
+          </div>
+          <div class="pay-details">
+            <div class="pay-number">0857-XXXX-XXXX</div>
+            <div class="pay-holder">a.n. Nama Anda</div>
+          </div>
+        </div>
+
+        <!-- GoPay -->
+        <div class="pay-item">
+          <div class="pay-logo-name">
+            <img src="gopay.png" alt="GoPay">
+            <span>GoPay</span>
+          </div>
+          <div class="pay-details">
+            <div class="pay-number">0857-XXXX-XXXX</div>
+            <div class="pay-holder">a.n. Nama Anda</div>
+          </div>
+        </div>
+
+        <!-- BNI -->
+        <div class="pay-item">
+          <div class="pay-logo-name">
+            <img src="bni.png" alt="BNI">
+            <span>Bank BNI</span>
+          </div>
+          <div class="pay-details">
+            <div class="pay-number">1234567890</div>
+            <div class="pay-holder">a.n. Nama Anda</div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Tombol Konfirmasi WA -->
@@ -198,12 +326,17 @@
 
   <script>
     const HARGA_PER_UNIT = 200000;
-    const ADMIN_WA = "6285726814654"; // Nomor WA milikmu
+    const ADMIN_WA = "6285726814654"; // Nomor WA kamu
+    let savedUnitsList = [];
 
-    // Generate Kode Unik 3 Angka Acak (Misal 101-999)
-    const kodeUnik = Math.floor(Math.random() * 899) + 100;
+    const cachedUniqueCodes = [];
+    function getUniqueCodeForUnit(index) {
+      if (!cachedUniqueCodes[index]) {
+        cachedUniqueCodes[index] = Math.floor(Math.random() * 89) + 10;
+      }
+      return cachedUniqueCodes[index];
+    }
 
-    // 1. Ambil Parameter Hardware ID dari URL (?hwid=XXX)
     function getUrlParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name) || '';
@@ -216,40 +349,111 @@
       if (hwFromUrl) {
         hwIdInput.value = hwFromUrl;
       } else {
-        hwIdInput.value = "PLN-DEMO-HARDWARE-ID"; // Fallback jika dibuka langsung
+        hwIdInput.value = 'PLN-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + Date.now().toString(36).substring(4).toUpperCase();
       }
 
+      setupTagSystem();
       calculateTotal();
     });
 
-    // 2. Hitung Otomatis Total Harga
-    function calculateTotal() {
-      const unit = parseInt(document.getElementById('jumlahUnit').value) || 1;
-      const bulan = parseInt(document.getElementById('durasiBulan').value) || 1;
+    function setupTagSystem() {
+      const inputBox = document.getElementById('unitInputBox');
+      const btnAdd = document.getElementById('btnAddUnitTag');
+      const errorMsg = document.getElementById('unitError');
 
-      const subtotal = unit * bulan * HARGA_PER_UNIT;
-      const total = subtotal + kodeUnik;
+      btnAdd.addEventListener('click', () => {
+        const val = inputBox.value.trim();
 
-      document.getElementById('subtotalTxt').innerText = "Rp " + subtotal.toLocaleString('id-ID');
-      document.getElementById('kodeUnikTxt').innerText = "+Rp " + kodeUnik;
-      document.getElementById('totalTxt').innerText = "Rp " + total.toLocaleString('id-ID');
+        if (val.length !== 5) {
+          inputBox.classList.add('error');
+          errorMsg.style.display = 'block';
+          errorMsg.innerText = "⚠️ Kode unit/ULP harus tepat 5 digit!";
+          return;
+        }
 
-      updateWaLink(total, unit, bulan);
+        if (savedUnitsList.includes(val)) {
+          inputBox.classList.add('error');
+          errorMsg.style.display = 'block';
+          errorMsg.innerText = "⚠️ Kode unit tersebut sudah ditambahkan!";
+          return;
+        }
+
+        inputBox.classList.remove('error');
+        errorMsg.style.display = 'none';
+        
+        savedUnitsList.push(val);
+        inputBox.value = '';
+        inputBox.focus();
+
+        renderTags();
+        calculateTotal();
+      });
+
+      inputBox.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          btnAdd.click();
+        }
+      });
     }
 
-    // Bind Event Handler ke Form Input
-    document.getElementById('jumlahUnit').addEventListener('input', calculateTotal);
+    function renderTags() {
+      const container = document.getElementById('unitTagsContainer');
+      container.innerHTML = '';
+
+      savedUnitsList.forEach((unit, index) => {
+        const tag = document.createElement('div');
+        tag.className = 'unit-tag';
+        tag.innerHTML = `${unit} <span title="Hapus" data-index="${index}">&times;</span>`;
+
+        tag.querySelector('span').addEventListener('click', () => {
+          savedUnitsList.splice(index, 1);
+          renderTags();
+          calculateTotal();
+        });
+
+        container.appendChild(tag);
+      });
+    }
+
+    function calculateTotal() {
+      const unitCountField = document.getElementById('jumlahUnit');
+      const bulanInput = document.getElementById('durasiBulan');
+      const totalUnits = savedUnitsList.length;
+
+      unitCountField.value = totalUnits;
+
+      const bulan = parseInt(bulanInput.value) || 1;
+      const subtotal = totalUnits * bulan * HARGA_PER_UNIT;
+
+      let totalKodeUnik = 0;
+      let stringKodeUnikHtml = "";
+      let stringKodeUnikWa = "";
+
+      for (let i = 0; i < totalUnits; i++) {
+        const uVal = getUniqueCodeForUnit(i);
+        totalKodeUnik += uVal;
+        stringKodeUnikHtml += `+Rp ${uVal} `;
+        stringKodeUnikWa += `+Rp ${uVal} `;
+      }
+
+      const total = totalUnits > 0 ? subtotal + totalKodeUnik : 200000;
+
+      document.getElementById('subtotalTxt').innerText = "Rp " + subtotal.toLocaleString('id-ID');
+      document.getElementById('kodeUnikTxt').innerText = totalUnits > 0 ? stringKodeUnikHtml.trim() : "+Rp 0";
+      document.getElementById('totalTxt').innerText = "Rp " + total.toLocaleString('id-ID');
+
+      updateWaLink(totalUnits > 0 ? total : 200000, totalUnits, bulan, stringKodeUnikWa.trim(), savedUnitsList);
+    }
+
     document.getElementById('durasiBulan').addEventListener('input', calculateTotal);
     document.getElementById('namaUser').addEventListener('input', calculateTotal);
-    document.getElementById('allowedUnit').addEventListener('input', calculateTotal);
 
-    // 3. Susun Pesan Otomatis ke WhatsApp
-    function updateWaLink(totalAmount, unit, bulan) {
+    function updateWaLink(totalAmount, unit, bulan, kodeUnikStr, unitList) {
       const hwId = document.getElementById('hardwareId').value;
       const nama = document.getElementById('namaUser').value || '[Belum diisi]';
-      const kodeUnit = document.getElementById('allowedUnit').value || '[Belum diisi]';
+      const formattedUnits = unitList.length > 0 ? unitList.join(', ') : '[Belum diisi]';
 
-      // Tanggal Expired Otomatis (Hari ini + durasi bulan)
       const expDate = new Date();
       expDate.setMonth(expDate.getMonth() + bulan);
       const expFormatted = expDate.toISOString().split('T')[0];
@@ -257,9 +461,9 @@
       const pesan = `Halo Admin Panksite,\n\nSaya telah melakukan pembayaran untuk *Lisensi LBKB PLN Auto Processor*.\n\n` +
         `👤 *Nama Pembeli:* ${nama}\n` +
         `🔑 *Hardware ID:* \`${hwId}\`\n` +
-        `📌 *Kode Unit:* ${kodeUnit} (${unit} Unit)\n` +
+        `📌 *Kode Unit:* ${formattedUnits} (${unit} Unit)\n` +
         `📅 *Durasi:* ${bulan} Bulan (Expired S/D: ${expFormatted})\n` +
-        `💰 *Nominal Transfer:* Rp ${totalAmount.toLocaleString('id-ID')}\n\n` +
+        `💰 *Nominal Transfer:* Rp ${totalAmount.toLocaleString('id-ID')} (${kodeUnikStr})\n\n` +
         `Mohon verifikasi pembayaran & aktifkan kode lisensinya. Terima kasih!`;
 
       const btnWa = document.getElementById('btnWa');
